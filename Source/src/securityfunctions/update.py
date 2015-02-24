@@ -5,14 +5,14 @@
 class Update():
 
 	def __init__(self):
-		print("") # empty print statement to be removed when file is worked on
+		print('')
 
 	def update(self):
-		print("")
+		print('')
 
-	def update_upgrad(self):
-		print("")
+	def update_upgrade(self):
+		print('')
 
 	def updateall(self):
-		print("")
+		print('')
 		# this function also includes $ sudo apt-get dist-upgrade
