@@ -4,9 +4,6 @@
 
 class Update():
 
-	def __init__(self):
-		print('')
-
 	def update(self):
 		print('')
 

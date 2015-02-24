@@ -2,9 +2,6 @@
 
 class Firewall():
 
-	def __init__(self):
-		print('')
-
 	def enable(self):
 		print('')
 
