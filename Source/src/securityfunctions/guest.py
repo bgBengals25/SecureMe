@@ -1,4 +1,4 @@
-# Peter Toth
+# Made by Luke Dinkler and Peter Toth
 
 class GuestAccount():
 

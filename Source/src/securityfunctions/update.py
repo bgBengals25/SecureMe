@@ -1,4 +1,4 @@
-# Peter Toth
+# Made by Luke Dinkler and Peter Toth
 
 # THIS FILE WILL BE USED FOR UPDATING THE MACHINE
 
