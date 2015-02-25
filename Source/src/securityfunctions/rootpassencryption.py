@@ -21,8 +21,10 @@ class Encryption():
 				if i.lower() == a.lower():
 
 					if i.istitle() == True:
+						print(key_list[alphabet_list.index(a)])
 						i = key_list[alphabet_list.index(a)]
 					elif i.istitle() == False:
+						print(key_list[alphabet_list.index(a)].lower())
 						i = key_list[alphabet_list.index(a)].lower()
 
 		print(encrypted_list)
