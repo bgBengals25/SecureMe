@@ -1,10 +1,10 @@
 # Made by Luke Dinkler and Peter Toth
 
-from src.gui.gui import InitGUI
+from src.gui.gui import InitGUI #Imports GUI module
 
-def start():
-	gui = InitGUI()
+def start(): #Defines Start function
+	gui = InitGUI() #Initializes GUI
 	print('Created GUI')
 
 if __name__ == '__main__':
-	start()
+	start() #Starts the Software
