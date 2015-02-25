@@ -53,4 +53,4 @@ class Encryption():
 		for indx in decrypted_list:
 			decrypted_string += str(indx)
 
-		return encrypted_string
+		return decrypted_string
