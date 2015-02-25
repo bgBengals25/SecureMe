@@ -2,6 +2,8 @@
 
 # This file encrypts and decrypts our code with our own encryption
 
+import re
+
 class Encryption():
 
 	FILE_LOCATION = 'p.dat'
@@ -11,8 +13,8 @@ class Encryption():
 	def encrypt(self, passwd):
 		file = open(self.FILE_LOCATION, 'w')
 		original_list = list(passwd)
-		alphabet_list = self.ALPHABET.split()
-		key_list = self.KEY.split()
+		alphabet_list = re.split(r"(\s+)", self.ALPHABET)
+		key_list = re.split(r"(\s+)", self.KEY)
 		encrypted_list = []
 
 		for i in original_list:
