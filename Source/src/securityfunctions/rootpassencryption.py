@@ -7,8 +7,8 @@ import re
 class Encryption():
 
 	FILE_LOCATION = 'p.dat'
-	ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+;:'`~.,/| "
-	KEY =      "|Q7!A@Z1#W$'S%X3^E &8D*C4)R(F_V-T/G,5B.Y~H=9+N;6UJ:M1IK0`OLP"
+	ALPHABET = "abcdefghijklmnopqrstuvwkyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+;:'`~.,/| "
+	KEY =      "|oQ7!nA@pZm1#W$ql'S%rXk3^sE jt&8Diu*C4h)Rv(F_gV-Tw/fG,5xeB.Ydy~H=9cz+N;b6UJa:M1IK0`OLP"
 
 	def encrypt(self, passwd):
 		file = open(self.FILE_LOCATION, 'w')
@@ -22,13 +22,13 @@ class Encryption():
 			for a in alphabet_list:
 
 				if i.lower() == a.lower():
-
-					if i.istitle() == True:
 						encrypted_list.append(key_list[alphabet_list.index(a)])
-					elif i.istitle() == False:
-						encrypted_list.append(key_list[alphabet_list.index(a)].lower())
 
-		file.write("".join(encrypted_list))
+		encrypted_string = ''
+		for indx in encrypted_list:
+			encrypted_string += str(indx)
+
+		file.write(encrypted_string)
 
 
 	def decrypt(self):
