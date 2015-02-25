@@ -10,7 +10,7 @@ class Firewall():
 		print('Enabling Universal Firewall...')
 
 		admin.AdminExec("ufw enable", UserPasswd)
-		print('Firewall Enabled!")
+		print('Firewall Enabled!')
 
 	def disable(self):
 		print('Disabling Universal Firewall...')
@@ -19,5 +19,3 @@ class Firewall():
 
 	def addexception(self, exception):
 		print('insert code here')
-
-
