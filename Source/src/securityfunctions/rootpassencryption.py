@@ -10,11 +10,12 @@ class Encryption():
 
 	def encrypt(self, passwd):
 		file = open(self.FILE_LOCATION, 'w')
-		encrypted_list = list(passwd)
+		original_list = list(passwd)
 		alphabet_list = list(self.ALPHABET)
 		key_list = list(self.KEY)
+		encrypted_list = []
 
-		for i in encrypted_list:
+		for i in original_list:
 
 			for a in alphabet_list:
 
@@ -22,10 +23,10 @@ class Encryption():
 
 					if i.istitle() == True:
 						print(key_list[alphabet_list.index(a)])
-						i = key_list[alphabet_list.index(a)]
+						encrypted_list.append(key_list[alphabet_list.index(a)])
 					elif i.istitle() == False:
 						print(key_list[alphabet_list.index(a)].lower())
-						i = key_list[alphabet_list.index(a)].lower()
+						encrypted_list.append(key_list[alphabet_list.index(a)].lower())
 
 		print(encrypted_list)
 
