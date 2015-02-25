@@ -4,7 +4,7 @@ class Firewall():
 	def enable(self):
 		print('Enabling Universal Firewall...')
 		os.system("sudo ufw enable")
-		print('Firewall Enabled!")
+		print('Firewall Enabled!')
 
 	def disable(self):
 		print('Disabling Universal Firewall...')

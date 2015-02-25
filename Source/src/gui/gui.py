@@ -18,6 +18,7 @@ class InitGUI():
 		self.root.geometry("600x500+300+300")
 		self.root.title("SecureMe")
 		self.root.resizable(width=FALSE, height=FALSE)
+		self.root.configure(font=self.liberation_font_10)
 
 		self.notebook = ttk.Notebook(self.root, height=500)
 		basicFrame = Frame(self.notebook)
@@ -28,7 +29,6 @@ class InitGUI():
 		self.notebook.add(usersFrame, text='Users')
 		self.notebook.add(updateFrame, text='Updates')
 		self.notebook.add(firewallFrame, text='Firewall')
-		self.notebook.configure(font=self.liberation_font_10)
 		self.notebook.pack(fill=BOTH)
 
 		basic_Label = Label(basicFrame, text='Basic Security Settings', font=self.liberation_font_15)
