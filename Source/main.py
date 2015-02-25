@@ -1,6 +1,6 @@
 # Made by Luke Dinkler and Peter Toth
 
-from src.gui.gui import InitGUI
+from src.gui.gui import InitGUI #Imports GUI module
 
 def start(): #Defines Start function
 	gui = InitGUI() #Initializes GUI
