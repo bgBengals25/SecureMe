@@ -26,7 +26,7 @@ class Encryption():
 					elif i.istitle() == False:
 						encrypted_list.append(key_list[alphabet_list.index(a)].lower())
 
-		print(encrypted_list)
+		file.write(encrypted_list)
 
 
 	def decrypt(self):
@@ -47,4 +47,4 @@ class Encryption():
 					elif i.istitle() == False:
 						decrypted_list.append(alphabet_list[key_list.index(k)].lower())
 
-		print(decrypted_list)
+		return "".join(decrypted_list)
