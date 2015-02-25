@@ -5,8 +5,8 @@
 class Encryption():
 
 	FILE_LOCATION = 'p.dat'
-	ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+;:'`~.,/"
-	KEY =      "Q7!A@Z1#W$'S%X3^E &8D*C4)R(F_V-T/G,5B.Y~H=9+N;6UJ:M1IK0OLP"
+	ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+;:'`~.,/|"
+	KEY =      "|Q7!A@Z1#W$'S%X3^E &8D*C4)R(F_V-T/G,5B.Y~H=9+N;6UJ:M1IK0OLP"
 
 	def encrypt(self, passwd):
 		file = open(self.FILE_LOCATION, 'w')
@@ -22,14 +22,29 @@ class Encryption():
 				if i.lower() == a.lower():
 
 					if i.istitle() == True:
-						print(key_list[alphabet_list.index(a)])
 						encrypted_list.append(key_list[alphabet_list.index(a)])
 					elif i.istitle() == False:
-						print(key_list[alphabet_list.index(a)].lower())
 						encrypted_list.append(key_list[alphabet_list.index(a)].lower())
 
 		print(encrypted_list)
 
 
 	def decrypt(self):
-		print('')
+		file = open(self.FILE_LOCATION, 'r')
+		encrypted_list = list(file.read())
+		alphabet_list = list(self.ALPHABET)
+		key_list = list(self.KEY)
+		decrypted_list = []
+
+		for i in encrypted_list:
+
+			for k in key_list:
+
+				if i.lower() == k.lower():
+
+					if i.istitle() == True:
+						decrypted_list.append(alphabet_list[key_list.index(k)])
+					elif i.istitle() == False:
+						decrypted_list.append(alphabet_list[key_list.index(k)].lower())
+
+		print(decrypted_list)
