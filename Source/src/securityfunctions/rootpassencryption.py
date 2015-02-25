@@ -21,9 +21,9 @@ class Encryption():
 				if i.lower() == a.lower():
 
 					if i.istitle() == True:
-						i = a
+						i = key_list[alphabet_list.index(a)]
 					elif i.istitle() == False:
-						i = a.lower()
+						i = key_list[alphabet_list.index(a)].lower()
 
 		print(encrypted_list)
 
