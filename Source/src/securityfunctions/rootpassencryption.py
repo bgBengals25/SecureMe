@@ -11,8 +11,8 @@ class Encryption():
 	def encrypt(self, passwd):
 		file = open(self.FILE_LOCATION, 'w')
 		original_list = list(passwd)
-		alphabet_list = self.ALPHABET.split('')
-		key_list = self.KEY.split('')
+		alphabet_list = self.ALPHABET.split()
+		key_list = self.KEY.split()
 		encrypted_list = []
 
 		for i in original_list:
