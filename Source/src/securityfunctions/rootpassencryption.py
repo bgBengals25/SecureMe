@@ -12,7 +12,7 @@ class Encryption():
 
 	def encrypt(self, passwd):
 		file = open(self.FILE_LOCATION, 'w')
-		original_list = list(passwd)
+		original_list = re.split(r"(\s+)", passwd)
 		alphabet_list = re.split(r"(\s+)", self.ALPHABET)
 		key_list = re.split(r"(\s+)", self.KEY)
 		encrypted_list = []
@@ -33,9 +33,9 @@ class Encryption():
 
 	def decrypt(self):
 		file = open(self.FILE_LOCATION, 'r')
-		encrypted_list = list(file.read())
-		alphabet_list = list(self.ALPHABET)
-		key_list = list(self.KEY)
+		encrypted_list = re.split(r"(\s+)", file.read())
+		alphabet_list = re.split(r"(\s+)", self.ALPHABET)
+		key_list = re.split(r"(\s+)", self.KEY)
 		decrypted_list = []
 
 		for i in encrypted_list:
