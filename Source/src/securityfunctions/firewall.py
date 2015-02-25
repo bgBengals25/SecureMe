@@ -1,9 +1,8 @@
 # Made by Luke Dinkler and Peter Toth
 import os, subprocess, admin
+from rootpassencryption import *
 
-pwdfile = open("p.dat", "r") #Loads proposed password file
-UserPasswd = pwdfile.read() #Gets Password from the file
-pwdfile.close() #closes the file
+UserPassword = encryption.decrypt()
 
 class Firewall():
 	def enable(self):
