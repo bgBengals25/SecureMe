@@ -3,6 +3,7 @@
 from src.gui.gui import InitGUI
 
 def start():
+	print('start')
 	gui = InitGUI()
 	print('Created GUI')
 
