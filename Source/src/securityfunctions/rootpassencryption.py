@@ -49,4 +49,8 @@ class Encryption():
 					elif i.istitle() == False:
 						decrypted_list.append(alphabet_list[key_list.index(k)].lower())
 
-		return "".join(decrypted_list)
+		decrypted_string = ''
+		for indx in decrypted_list:
+			decrypted_string += str(indx)
+
+		return encrypted_string
