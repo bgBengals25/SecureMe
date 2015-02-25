@@ -12,7 +12,7 @@ class Encryption():
 		file = open(self.FILE_LOCATION, 'w')
 		encrypted_list = list(passwd)
 		alphabet_list = list(self.ALPHABET)
-		key_list = list(key)
+		key_list = list(self.KEY)
 
 		for i in encrypted_list:
 
