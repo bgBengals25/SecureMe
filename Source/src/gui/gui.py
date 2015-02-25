@@ -18,6 +18,7 @@ class InitGUI():
 		self.root.geometry("600x500+300+300")
 		self.root.title("SecureMe")
 		self.root.resizable(width=FALSE, height=FALSE)
+		self.root.configure(font=self.liberation_font_10)
 
 		self.notebook = ttk.Notebook(self.root, height=500)
 		basicFrame = Frame(self.notebook)
