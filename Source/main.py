@@ -3,9 +3,8 @@
 from src.gui.gui import InitGUI
 
 def start():
-	print('start')
 	gui = InitGUI()
 	print('Created GUI')
 
-if __name__ == 'main':
+if __name__ == '__main__':
 	start()
