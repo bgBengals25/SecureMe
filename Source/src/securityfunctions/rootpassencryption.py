@@ -7,14 +7,14 @@ import re
 class Encryption():
 
 	FILE_LOCATION = 'p.dat'
-	ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+;:'`~.,/|"
-	KEY =      "|Q7!A@Z1#W$'S%X3^E &8D*C4)R(F_V-T/G,5B.Y~H=9+N;6UJ:M1IK0OLP"
+	ALPHABET = "abcdefghijklmnopqrstuvwkyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+;:'`~.,/| "
+	KEY =      "|oQ7!nA@pZm1#W$ql'S%rXk3^sE jt&8Diu*C4h)Rv(F_gV-Tw/fG,5xeB.Ydy~H=9cz+N;b6UJa:M1IK0`OLP"
 
 	def encrypt(self, passwd):
 		file = open(self.FILE_LOCATION, 'w')
-		original_list = re.split(r"(\s+)", passwd)
-		alphabet_list = re.split(r"(\s+)", self.ALPHABET)
-		key_list = re.split(r"(\s+)", self.KEY)
+		original_list = list(passwd)
+		alphabet_list = list(self.ALPHABET)
+		key_list = list(self.KEY)
 		encrypted_list = []
 
 		for i in original_list:
@@ -22,20 +22,20 @@ class Encryption():
 			for a in alphabet_list:
 
 				if i.lower() == a.lower():
-
-					if i.istitle() == True:
 						encrypted_list.append(key_list[alphabet_list.index(a)])
-					elif i.istitle() == False:
-						encrypted_list.append(key_list[alphabet_list.index(a)].lower())
 
-		file.write("".join(encrypted_list))
+		encrypted_string = ''
+		for indx in encrypted_list:
+			encrypted_string += str(indx)
+
+		file.write(encrypted_string)
 
 
 	def decrypt(self):
 		file = open(self.FILE_LOCATION, 'r')
-		encrypted_list = re.split(r"(\s+)", file.read())
-		alphabet_list = re.split(r"(\s+)", self.ALPHABET)
-		key_list = re.split(r"(\s+)", self.KEY)
+		encrypted_list = list(file.read())
+		alphabet_list = list(self.ALPHABET)
+		key_list = list(self.KEY)
 		decrypted_list = []
 
 		for i in encrypted_list:
