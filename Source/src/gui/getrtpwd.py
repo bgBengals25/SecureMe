@@ -34,6 +34,7 @@ class RootPasswordWindow():
 		pswd = self.e.get()
 		self.enc.encrypt(pswd)
 		print('Password Set')
+		self.root.destroy()
 
 	def cancel(self):
 		print("FATAL: No Root Password! Exiting...")

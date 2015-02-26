@@ -3,6 +3,7 @@
 import Tkinter
 from Tkinter import *
 import ttk
+from getrtpwd import RootPasswordWindow
 
 class InitGUI():
 
@@ -10,7 +11,9 @@ class InitGUI():
 	liberation_font_10 = ("Liberation Sans", 10)
 	liberation_font_15 = ("Liberation Sans", 15)
 
-	def __init__(self):
+	def __init__(self, enc):
+		self.enc = enc
+		rpw = RootPasswordWindow(self.enc)
 		self.build()
 
 	def build(self):
