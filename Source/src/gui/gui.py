@@ -52,9 +52,11 @@ class InitGUI():
 		users_label.pack()
 
 		userpanel = LabelFrame(usersFrame, text="Users:", padx=10, pady=10)
-		userpanel.pack(side=LEFT)
+		userpanel.pack(side=TOP)
 
 		uText = self.getUserText()
+		users_listlabel = Label(userpanel, text=uText, padx=10, pady=10)
+		users_listlabel.pack(side=LEFT)
 
 		# Firewall Label
 		firewall_label = Label(firewallFrame, text='Firewall Settings', font=self.liberation_font_15)
@@ -82,9 +84,9 @@ class InitGUI():
 	def getUserText(self):
 		u = Users()
 		retstr = u.getUsers()
-
+		ret = ''
 		for i in retstr:
-			ret += "User: " + i
+			ret += "User: " + i + "\n"
 		return ret
 
 	def basicUpdate(self):

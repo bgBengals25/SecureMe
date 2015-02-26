@@ -8,16 +8,13 @@ if os.path.exists("p.dat"):
 
 class Users():
 
-	def __init__(self):
-		print('')
-
 	def deluser(self, user):
 		admin.AdminExec("deluser -r " + user, UserPasswd)
 
 	def adduser(self, username):
 		admin.AdminExec('adduser ' + user + ' gecos -- " , , , ," --disabled-password', UserPasswd)
 		
-	def getusers(self):
+	def getUsers(self):
 
 		users = []
 
