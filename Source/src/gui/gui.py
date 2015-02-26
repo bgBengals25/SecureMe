@@ -35,7 +35,7 @@ class InitGUI():
 
 		self.notebook = ttk.Notebook(self.root, height=500)
 		basicFrame = Frame(self.notebook)
-		usersFrame = Frame(self.notebook, yscrollcommand=users_scrollbar.set)
+		usersFrame = Frame(self.notebook)
 		firewallFrame = Frame(self.notebook)
 		updateFrame = Frame(self.notebook)
 		self.notebook.add(basicFrame, text='Basic')
@@ -65,8 +65,8 @@ class InitGUI():
 		grouppanel.pack(side=TOP)
 
 		gText = self.getGroupText()
-		groups_listlabel = Label(grouppanel, text=gText, padx=10, pady=10)
-		groups_listlabel.pack(side=LEFT)
+		groups_listtext = Text(grouppanel, text=gText, padx=10, pady=10, yscrollcommand=users_scrollbar.set)
+		groups_listtext.pack(side=LEFT)
 
 		# Firewall Label
 		firewall_label = Label(firewallFrame, text='Firewall Settings', font=self.liberation_font_15)

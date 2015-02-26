@@ -7,5 +7,5 @@ class Services():
 		svcraw = os.popen("service --status-all").read()
 		services = svcraw.split("\n")
 		return services
-		
+
 
