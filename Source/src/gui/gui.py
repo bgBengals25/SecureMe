@@ -5,7 +5,7 @@ from Tkinter import *
 import ttk
 from getrtpwd import RootPasswordWindow
 import os
-os.system('cd ..')
+os.system('cd ..') #Setting CWD back to access modules
 from src.securityfunctions.admin import *
 from src.securityfunctions.firewall import *
 from src.securityfunctions.guest import *
