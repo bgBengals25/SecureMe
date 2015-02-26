@@ -66,6 +66,8 @@ class InitGUI():
 		update_label = Label(updateFrame, text='System Updates', font=self.liberation_font_15)
 		update_label.pack()
 
+		update_button = Button(updateFrame, text='Standard Update', font=self.liberation_font_10)
+
 		self.root.mainloop()
 
 	def getPassword(self):
