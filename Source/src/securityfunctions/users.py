@@ -1,5 +1,5 @@
 # Made by Luke Dinkler and Peter Toth
-import admin, os 
+import admin, os, pwd
 from rootpassencryption import *
 
 enc = Encryption()
@@ -17,7 +17,15 @@ class Users():
 	def adduser(self, username):
 		admin.AdminExec('adduser ' + user + ' gecos -- " , , , ," --disabled-password', UserPasswd)
 		
+	def getusers(self):
+		for i in range(1000, 2000):
 
+        	try:
+                	p = pwd.getpwuid(i)
+                	return p[0]
+        	except:
+                	pass
+		
 
 
 
