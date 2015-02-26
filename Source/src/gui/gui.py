@@ -4,7 +4,7 @@ import Tkinter
 from Tkinter import *
 import ttk
 from getrtpwd import RootPasswordWindow
-import os
+import os, sys
 os.system('cd ..')
 from src.securityfunctions.admin import *
 from src.securityfunctions.firewall import *
@@ -26,12 +26,17 @@ class InitGUI():
 
 	def build(self):
 		self.root = Tk()
-		self.root.geometry("500x300+300+300")
+		self.root.geometry("500x400+300+300")
 		self.root.title("SecureMe")
 		self.root.resizable(width=FALSE, height=FALSE)
 
-		users_scrollbar = Scrollbar(self.root)
-		users_scrollbar.pack(side=RIGHT, fill=Y)
+		# Menubar
+		menubar = Menu(self.root)
+		options = Menu(menubar, tearoff=0)
+		options.add_command(label="Refresh", command=lambda : self.refresh())
+		options.add_command(label="Exit", command=lambda : sys.exit(0))
+		menubar.add_cascade(label="Options", menu=options)
+		self.root.configure(menu=menubar)
 
 		self.notebook = ttk.Notebook(self.root, height=500)
 		basicFrame = Frame(self.notebook)
@@ -51,22 +56,25 @@ class InitGUI():
 		basic_update.pack(padx=10, pady=10)
 
 		# Users Panel
+		usersFrame.config(padx=25, pady=25)
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
 		users_label.pack()
 
 		userpanel = LabelFrame(usersFrame, text="Users", padx=10, pady=10)
-		userpanel.pack(side=TOP)
+		userpanel.pack(side=TOP, fill=BOTH)
 
 		uText = self.getUserText()
-		users_listlabel = Label(userpanel, text=uText, padx=10, pady=10)
-		users_listlabel.pack(side=LEFT)
+		self.users_listlabel = Label(userpanel, text=uText, padx=10, pady=10)
+		self.users_listlabel.pack(side=LEFT)
 
 		grouppanel = LabelFrame(usersFrame, text='Groups', padx=10, pady=10)
-		grouppanel.pack(side=TOP)
+		grouppanel.pack(side=TOP, fill=BOTH)
 
 		gText = self.getGroupText()
-		groups_listtext = Text(grouppanel, text=gText, padx=10, pady=10, yscrollcommand=users_scrollbar.set)
-		groups_listtext.pack(side=LEFT)
+		self.groups_listtext = Text(grouppanel, padx=10, pady=10)
+		self.groups_listtext.insert(END, gText)
+		self.groups_listtext.config(state=DISABLED)
+		self.groups_listtext.pack(side=LEFT, fill=BOTH)
 
 		# Firewall Label
 		firewall_label = Label(firewallFrame, text='Firewall Settings', font=self.liberation_font_15)
@@ -87,6 +95,13 @@ class InitGUI():
 
 		self.root.mainloop()
 
+	def refresh(self):
+		uText = self.getUserText()
+		gText = self.getGroupText()
+		self.users_listlabel.config(text=uText)
+		self.groups_listtext.delete("1.0", END)
+		#self.groups_listtext.insert(END, gText)
+
 	def getPassword(self):
 		pwd = self.enc.decrypt()
 		return pwd
@@ -105,6 +120,7 @@ class InitGUI():
 		ret = ''
 		for i in retstr:
 			ret += i + "\n"
+		print(ret)
 		return ret
 
 	def basicUpdate(self):
