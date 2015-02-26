@@ -12,7 +12,10 @@ class Users():
 		print('')
 
 	def deluser(self, user):
-		admin.AdminExec("userdel -r " + user, UserPassword)
+		admin.AdminExec("userdel -r " + user, UserPasswd)
+
+	def adduser(self, username):
+		admin.AdminExec("useradd " + username, UserPasswd)
 		
 
 
