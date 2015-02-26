@@ -15,7 +15,7 @@ class Update():
 
 	def update_upgrade(self):
 		print("Upgrading new packages...")
-a		admin.AdminExec('apt-get upgrade', UserPasswd)
+		admin.AdminExec('apt-get upgrade', UserPasswd)
 
 
 	def updateall(self):
