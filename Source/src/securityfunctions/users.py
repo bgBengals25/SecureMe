@@ -32,16 +32,13 @@ class Users():
 
 class Groups():
 
-	def __init(self):
-		print('')
-
 	def addtogroup(self, user, group):
 		admin.AdminExec('usermod -a -G ' + group + ' ' + user, UserPasswd)
 
 	def addtogroups(self, user, groups): #Here 'groups' is a list
 		admin.AdminExec('usermod -a -G ' + str(groups) + ' ' + user, UserPasswd)
 
-	def getgroups(self):
+	def getGroups(self):
 		gpraw = os.popen("cat /etc/group").read()
 		groups = gpraw.split("\n")
 		return groups

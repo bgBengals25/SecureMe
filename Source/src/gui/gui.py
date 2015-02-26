@@ -30,9 +30,12 @@ class InitGUI():
 		self.root.title("SecureMe")
 		self.root.resizable(width=FALSE, height=FALSE)
 
+		users_scrollbar = Scrollbar(self.root)
+		users_scrollbar.pack(side=RIGHT, fill=Y)
+
 		self.notebook = ttk.Notebook(self.root, height=500)
 		basicFrame = Frame(self.notebook)
-		usersFrame = Frame(self.notebook)
+		usersFrame = Frame(self.notebook, yscrollcommand=users_scrollbar.set)
 		firewallFrame = Frame(self.notebook)
 		updateFrame = Frame(self.notebook)
 		self.notebook.add(basicFrame, text='Basic')
@@ -51,12 +54,19 @@ class InitGUI():
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
 		users_label.pack()
 
-		userpanel = LabelFrame(usersFrame, text="Users:", padx=10, pady=10)
+		userpanel = LabelFrame(usersFrame, text="Users", padx=10, pady=10)
 		userpanel.pack(side=TOP)
 
 		uText = self.getUserText()
 		users_listlabel = Label(userpanel, text=uText, padx=10, pady=10)
 		users_listlabel.pack(side=LEFT)
+
+		grouppanel = LabelFrame(usersFrame, text='Groups', padx=10, pady=10)
+		grouppanel.pack(side=TOP)
+
+		gText = self.getGroupText()
+		groups_listlabel = Label(grouppanel, text=gText, padx=10, pady=10)
+		groups_listlabel.pack(side=LEFT)
 
 		# Firewall Label
 		firewall_label = Label(firewallFrame, text='Firewall Settings', font=self.liberation_font_15)
@@ -86,7 +96,15 @@ class InitGUI():
 		retstr = u.getUsers()
 		ret = ''
 		for i in retstr:
-			ret += "User: " + i + "\n"
+			ret += i + "\n"
+		return ret
+
+	def getGroupText(self):
+		g = Groups()
+		retstr = g.getGroups()
+		ret = ''
+		for i in retstr:
+			ret += i + "\n"
 		return ret
 
 	def basicUpdate(self):
