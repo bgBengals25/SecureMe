@@ -7,7 +7,7 @@ UserPassword = Encryption.decrypt()
 class GuestAccount():
 
 	def enable(self):
-		
+		print('')
 
 	def disable(self):
 		print("Disabling Guest Account...")
