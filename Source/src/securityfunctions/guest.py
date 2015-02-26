@@ -2,7 +2,7 @@
 import admin, os
 from rootpassencryption import *
 
-UserPassword = encryption.decrypt()
+UserPassword = Encryption.decrypt()
 
 class GuestAccount():
 
