@@ -2,55 +2,36 @@
 
 # This file encrypts and decrypts our code with our own encryption
 
-import re
+from Crypto import Random
+from Crypto.Cipher import AES
 
 class Encryption():
 
 	FILE_LOCATION = 'p.dat'
-	ALPHABET = "abcdefghijklmnopqrstuvwkyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+;:'`~.,/| "
-	KEY =      "|oQ7!nA@pZm1#W$ql'S%rXk3^sE jt&8Diu*C4h)Rv(F_gV-Tw/fG,5xeB.Ydy~H=9cz+N;b6UJa:M1IK0`OLP"
+	KEY = b'\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb\xc4\x94\x9d(\x9e[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18'
 
-	def encrypt(self, passwd):
-		file = open(self.FILE_LOCATION, 'w')
-		original_list = list(passwd)
-		alphabet_list = list(self.ALPHABET)
-		key_list = list(self.KEY)
-		encrypted_list = []
+	def pad(self, s):
+		return s + b"\0" * (AES.block_size - len(s) % AES.block_size)
 
-		for i in original_list:
+	def enc(self, passwd):
+		passwd = self.pad(passwd)
+		iv = Random.new().read(AES.block_size)
+		cipher = AES.new(self.KEY, AES.MODE_CBC, iv)
+		return iv + cipher.encrypt(passwd)
 
-			for a in alphabet_list:
+	def dec(ciphertext):
+		iv = ciphertext[:AES.block_size]
+		cipher = AES.new(self.KEY, AES.MODE_CBC, iv)
+		plaintext = cipher.decrypt(ciphertext[AES.block_size:])
+		return plaintext.rstrip(b"\0")
 
-				if i.lower() == a.lower():
-						encrypted_list.append(key_list[alphabet_list.index(a)])
-
-		encrypted_string = ''
-		for indx in encrypted_list:
-			encrypted_string += str(indx)
-
-		file.write(encrypted_string)
-
+	def encrypt(self, plaintext):
+		enc = self.enc(plaintext)
+		with open(self.FILE_LOCATION, 'wb') as f:
+			f.write(enc)
 
 	def decrypt(self):
-		file = open(self.FILE_LOCATION, 'r')
-		encrypted_list = list(file.read())
-		alphabet_list = list(self.ALPHABET)
-		key_list = list(self.KEY)
-		decrypted_list = []
-
-		for i in encrypted_list:
-
-			for k in key_list:
-
-				if i.lower() == k.lower():
-
-					if i.istitle() == True:
-						decrypted_list.append(alphabet_list[key_list.index(k)])
-					elif i.istitle() == False:
-						decrypted_list.append(alphabet_list[key_list.index(k)].lower())
-
-		decrypted_string = ''
-		for indx in decrypted_list:
-			decrypted_string += str(indx)
-
-		return decrypted_string
+		with open(self.FILE_LOCATION, 'rb') as f:
+			ciphertext = f.read()
+		dec = self.dec(ciphertext)
+		return dec
