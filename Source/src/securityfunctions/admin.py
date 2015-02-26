@@ -2,6 +2,7 @@
 import os
 
 def AdminExec(command, passwd):
-	cmd = "'echo %s|sudo -S %s' % (" + passwd + ", " + command + ")"
+	cmd = "echo " + passwd + " | sudo -S " + command
+	print(cmd)	
 	os.system(cmd)
 
