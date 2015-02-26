@@ -45,7 +45,7 @@ class InitGUI():
 		basic_label = Label(basicFrame, text='Basic Security Settings', font=self.liberation_font_15)
 		basic_label.pack()
 		basic_update = Button(basicFrame, text='Basic Update', command=lambda : self.basicUpdate())
-		basic_update.pack()
+		basic_update.pack(padx=10, pady=10)
 
 		# Users Panel
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
@@ -56,9 +56,9 @@ class InitGUI():
 		firewall_label.pack()
 
 		edFrame = Frame(firewallFrame)
-		fwEnable = Button(edFrame, text='Enable')
+		fwEnable = Button(edFrame, text='Enable', command=lambda : self.enableFirewall())
 		fwEnable.pack(side=LEFT, padx=10, pady=10)
-		fwDisable = Button(edFrame, text='Disable')
+		fwDisable = Button(edFrame, text='Disable', command=lambda : self.disableFirewall())
 		fwDisable.pack(side=RIGHT, padx=10, pady=10)
 		edFrame.pack()
 
@@ -68,6 +68,18 @@ class InitGUI():
 
 		self.root.mainloop()
 
+	def getPassword(self):
+		pwd = self.enc.decrypt()
+		return pwd
+
 	def basicUpdate(self):
 		ud = Update()
 		ud.update(self.enc)
+
+	def enableFirewall(self):
+		f = Firewall()
+		f.enable(self.getPassword())
+
+	def disableFirewall(self):
+		f = Firewall()
+		f.disable(self.getPassword())
