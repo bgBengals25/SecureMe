@@ -4,6 +4,14 @@ import Tkinter
 from Tkinter import *
 import ttk
 from getrtpwd import RootPasswordWindow
+import os
+os.system('cd ..')
+from src.securityfunctions.admin import *
+from src.securityfunctions.firewall import *
+from src.securityfunctions.guest import *
+from src.securityfunctions.rootpassencryption import *
+from src.securityfunctions.update import *
+from src.securityfunctions.users import *
 
 class InitGUI():
 
@@ -11,9 +19,9 @@ class InitGUI():
 	liberation_font_10 = ("Liberation Sans", 10)
 	liberation_font_15 = ("Liberation Sans", 15)
 
-	def __init__(self, enc):
-		self.enc = enc
-		rpw = RootPasswordWindow(self.enc)
+	def __init__(self):
+		self.enc = Encryption()
+		self.grp = RootPasswordWindow(self.enc)
 		self.build()
 
 	def build(self):
@@ -36,6 +44,8 @@ class InitGUI():
 		# Basic Panel
 		basic_label = Label(basicFrame, text='Basic Security Settings', font=self.liberation_font_15)
 		basic_label.pack()
+		basic_update = Button(basicFrame, text='Basic Update', command=lambda : self.basicUpdate())
+		basic_update.pack()
 
 		# Users Panel
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
@@ -57,3 +67,7 @@ class InitGUI():
 		update_label.pack()
 
 		self.root.mainloop()
+
+	def basicUpdate(self):
+		ud = Update()
+		ud.update(self.enc)
