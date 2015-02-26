@@ -4,7 +4,8 @@ import admin
 from rootpassencryption import *
 
 enc = Encryption()
-UserPasswd = enc.decrypt()
+if os.path.exists("p.dat"):
+	UserPasswd = enc.decrypt()
 
 class Update():
 
