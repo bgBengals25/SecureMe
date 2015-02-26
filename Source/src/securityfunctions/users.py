@@ -21,8 +21,7 @@ class Users():
 
 		users = []
 
-		for i in range(1000, 2000):
-
+		for i in range(1000, 2000): #Sets a range of 1000 users
 			try:
 				p = pwd.getpwuid(i)
 				users.append(p[0])
