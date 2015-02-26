@@ -18,14 +18,18 @@ class Users():
 		admin.AdminExec('adduser ' + user + ' gecos -- " , , , ," --disabled-password', UserPasswd)
 		
 	def getusers(self):
+
+		users = []
+
 		for i in range(1000, 2000):
 
-        		try:
-                		p = pwd.getpwuid(i)
-                		return p[0]
-        		except:
-                		pass
-		
+			try:
+				p = pwd.getpwuid(i)
+				users.append(p[0])
+			except:
+				pass
+
+		return users
 
 
 
