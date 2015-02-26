@@ -51,6 +51,9 @@ class InitGUI():
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
 		users_label.pack()
 
+		userpanel = LabelFrame(usersFrame, text="Users:", padx=10, pady=10)
+		userpanel.pack(side=LEFT)
+
 		# Firewall Label
 		firewall_label = Label(firewallFrame, text='Firewall Settings', font=self.liberation_font_15)
 		firewall_label.pack()
