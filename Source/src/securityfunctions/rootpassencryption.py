@@ -19,7 +19,7 @@ class Encryption():
 		cipher = AES.new(self.KEY, AES.MODE_CBC, iv)
 		return iv + cipher.encrypt(passwd)
 
-	def dec(ciphertext):
+	def dec(self, ciphertext):
 		iv = ciphertext[:AES.block_size]
 		cipher = AES.new(self.KEY, AES.MODE_CBC, iv)
 		plaintext = cipher.decrypt(ciphertext[AES.block_size:])
