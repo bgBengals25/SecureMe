@@ -45,7 +45,7 @@ class InitGUI():
 		basic_label = Label(basicFrame, text='Basic Security Settings', font=self.liberation_font_15)
 		basic_label.pack()
 		basic_update = Button(basicFrame, text='Basic Update', command=lambda : self.basicUpdate())
-		basic_update.pack()
+		basic_update.pack(padx=10, pady=10)
 
 		# Users Panel
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)

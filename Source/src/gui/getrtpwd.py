@@ -19,6 +19,7 @@ class RootPasswordWindow():
 		l.pack()
 
 		self.e = Entry(self.root)
+		self.e.bind("<Return>", lambda x: self.submit())
 		self.e.pack()
 
 		f = Frame(self.root)
