@@ -1,7 +1,7 @@
 # Made by Luke Dinkler and Peter Toth
 
 from src.gui.gui import InitGUI #Imports GUI module
-from src.securityfunctions import admin, firewall, users, guest
+from src.securityfunctions import admin, firewall, users, guest, update
 
 def start(): #Defines Start function
 	gui = InitGUI() #Initializes GUI
