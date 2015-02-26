@@ -2,7 +2,8 @@
 import os, subprocess, admin
 from rootpassencryption import *
 
-UserPassword = Encryption.decrypt()
+enc = Encryption()
+UserPasswd = enc.decrypt()
 
 class Firewall():
 	def enable(self):
