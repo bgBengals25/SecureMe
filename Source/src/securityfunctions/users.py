@@ -27,6 +27,10 @@ class Groups():
 	def __init(self):
 		print('')
 
-	def adduser(self, user, group):
-		admin.AdminExec( + group, UserPasswd)
+	def addtogroup(self, user, group):
+		admin.AdminExec('usermod -a -G ' + group + ' ' + user, UserPasswd)
+
+	def addtogroups(self, user, groups): #Here 'groups' is a list
+		admin.AdminExec('usermod -a -G ' + str(groups) + ' ' + user, UserPasswd)
+
 
