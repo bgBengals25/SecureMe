@@ -45,4 +45,7 @@ class Groups():
 	def addtogroups(self, user, groups): #Here 'groups' is a list
 		admin.AdminExec('usermod -a -G ' + str(groups) + ' ' + user, UserPasswd)
 
-
+	def getgroups(self):
+		gpraw = os.popen("cat /etc/group").read()
+		groups = gpraw.split("\n")
+		return groups
