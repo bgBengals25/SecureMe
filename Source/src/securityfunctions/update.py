@@ -11,17 +11,17 @@ class Update():
 	def update(self, enc):
 		UserPasswd = enc.decrypt()
 		print("Just updating...")
-		admin.AdminExec('apt-get update', UserPasswd)
+		admin.AdminExec('apt-get update -y', UserPasswd)
 		tkMessageBox.showinfo(title="SecureMe - Updated", message="Successfully Updated the system!")
 
 	def update_upgrade(self, enc):
 		UserPasswd = enc.decrypt()
 		print("Upgrading new packages...")
-		admin.AdminExec('apt-get upgrade', UserPasswd)
+		admin.AdminExec('apt-get upgrade -y', UserPasswd)
 		tkMessageBox.showinfo(title="SecureMe - Updated", message="Successfully Upgraded the system!")
 
 	def updateall(self, enc):
 		UserPasswd = enc.decrypt()
 		print("Completely upgrading all packages...")
-		admin.AdminExec('apt-get dist-upgrade', UserPasswd)
+		admin.AdminExec('apt-get dist-upgrade -y', UserPasswd)
 		tkMessageBox.showinfo(title="SecureMe - Updated", message="Successfully Updated the packages on your system!")
