@@ -12,10 +12,10 @@ class Users():
 		print('')
 
 	def deluser(self, user):
-		admin.AdminExec("userdel -r " + user, UserPasswd)
+		admin.AdminExec("deluser -r " + user, UserPasswd)
 
 	def adduser(self, username):
-		admin.AdminExec("useradd " + username, UserPasswd)
+		admin.AdminExec('adduser ' + user + ' gecos -- " , , , ," --disabled-password', UserPasswd)
 		
 
 
@@ -26,3 +26,11 @@ class Groups():
 
 	def __init(self):
 		print('')
+
+	def addtogroup(self, user, group):
+		admin.AdminExec('usermod -a -G ' + group + ' ' + user, UserPasswd)
+
+	def addtogroups(self, user, groups): #Here 'groups' is a list
+		admin.AdminExec('usermod -a -G ' + str(groups) + ' ' + user, UserPasswd)
+
+
