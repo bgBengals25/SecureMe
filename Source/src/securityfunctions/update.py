@@ -10,11 +10,13 @@ class Update():
 
 	def update(self):
 		print("Just updating (nothing special)...")
-		admin.AdminExec('apt get update', UserPasswd)
+		admin.AdminExec('apt-get update', UserPasswd)
 
 	def update_upgrade(self):
-		print('')
+		print("Upgrading new packages...")
+a		admin.AdminExec('apt-get upgrade', UserPasswd)
+
 
 	def updateall(self):
-		print('')
-		# this function also includes $ sudo apt-get dist-upgrade
+		print("Completely upgrading all packages...")
+		admin.AdminExec('apt-get dist-upgrade', UserPasswd)
