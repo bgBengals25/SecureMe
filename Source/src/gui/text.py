@@ -3,7 +3,7 @@
 import Tkinter
 from Tkinter import Text
 
-class GroupsText(Text):
+class CustomText(Text):
 
 	def __init__(self, root, **kwargs):
 		Text.__init__(self, root, **kwargs)

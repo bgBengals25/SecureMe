@@ -5,7 +5,7 @@ from Tkinter import *
 import ttk
 from getrtpwd import RootPasswordWindow
 import os, sys
-from gt import GroupsText
+from text import CustomText
 os.system('cd ..')
 from src.securityfunctions.admin import *
 from src.securityfunctions.firewall import *
@@ -13,6 +13,7 @@ from src.securityfunctions.guest import *
 from src.securityfunctions.rootpassencryption import *
 from src.securityfunctions.update import *
 from src.securityfunctions.users import *
+from src.securityfunctions.service import Services
 
 class InitGUI():
 
@@ -43,10 +44,12 @@ class InitGUI():
 		usersFrame = Frame(self.notebook, padx=25, pady=25)
 		firewallFrame = Frame(self.notebook)
 		updateFrame = Frame(self.notebook)
+		servicesFrame = Frame(self.notebook, padx=25, pady=25)
 		self.notebook.add(basicFrame, text='Basic')
 		self.notebook.add(usersFrame, text='Users')
 		self.notebook.add(updateFrame, text='Updates')
 		self.notebook.add(firewallFrame, text='Firewall')
+		self.notebook.add(servicesFrame, text='Services')
 		self.notebook.pack(fill=BOTH)
 
 		# Basic Panel
@@ -70,7 +73,7 @@ class InitGUI():
 		groupspanel.pack(side=TOP, fill=BOTH)
 
 		self.gText = self.getGroupText()
-		self.groups_text = GroupsText(groupspanel)
+		self.groups_text = CustomText(groupspanel)
 		self.groups_text.resetText(self.gText)
 		self.groups_text.type(DISABLED)
 		self.groups_text.pack(fill=BOTH)
@@ -90,7 +93,15 @@ class InitGUI():
 		update_label = Label(updateFrame, text='System Updates', font=self.liberation_font_15)
 		update_label.pack()
 
-		update_button = Button(updateFrame, text='Standard Update', font=self.liberation_font_10)
+		# Services Pane
+		servicespanel = LabelFrame(servicesFrame, text="Services", padx=10, pady=10)
+		servicespanel.pack(side=TOP, fill=BOTH)
+		self.sText = self.getServicesText()
+		self.services_text = CustomText(servicespanel)
+		self.services_text.resetText(self.sText)
+		self.services_text.type(DISABLED)
+		self.services_text.pack(fill=BOTH)
+
 
 		self.root.mainloop()
 
@@ -121,6 +132,11 @@ class InitGUI():
 		for i in retstr:
 			ret += i + "\n"
 		return ret
+
+	def getServicesText(self):
+		s = Services()
+		retstr = s.getservicesbasic()
+		return retstr
 
 	def basicUpdate(self):
 		ud = Update()
