@@ -4,7 +4,9 @@ import Tkinter
 from Tkinter import *
 import ttk
 from getrtpwd import RootPasswordWindow
-import os, sys
+import os, sys, time
+import threading
+from threading import Thread
 from text import CustomText
 os.system('cd ..')
 from src.securityfunctions.admin import *
@@ -29,13 +31,13 @@ class InitGUI():
 
 	def build(self):
 		self.root = Tk()
-		self.root.geometry("800x500+300+300")
+		self.root.geometry("800x543+300+300")
 		self.root.title("SecureMe")
 		self.root.resizable(width=FALSE, height=FALSE)
 
 		menubar = Menu(self.root)
 		optionsmenu = Menu(menubar)
-		optionsmenu.add_command(label="Refresh", command=lambda : self.refresh())
+		optionsmenu.add_command(label="Refresh (Ctrl+r)", command=lambda : self.refresh("NONE"))
 		optionsmenu.add_command(label="Exit", command=sys.exit)
 		menubar.add_cascade(label="Options", menu=optionsmenu)
 		self.root.config(menu=menubar)
@@ -51,7 +53,12 @@ class InitGUI():
 		self.notebook.add(firewallFrame, text='Firewall')
 		self.notebook.add(servicesFrame, text='Services')
 		self.notebook.add(processesFrame, text='Processes')
-		self.notebook.pack(fill=BOTH)
+		self.notebook.pack(fill=X)
+
+		self.updatebar = Frame(self.root)
+		self.updatebar.pack(side=BOTTOM, fill=X)
+		self.left_label = Label(self.updatebar, text="Current Process: None")
+		self.left_label.pack(side=LEFT, fill=X)
 
 		# Users Panel
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
@@ -130,9 +137,12 @@ class InitGUI():
 		self.processes_text.type(DISABLED)
 		self.processes_text.pack(fill=BOTH)
 
+		self.root.bind('<Control-r>', self.refresh)
+
 		self.root.mainloop()
 
-	def refresh(self):
+	def refresh(self, e):
+		self.setLeftLabel("Refreshing...")
 		self.uText = self.getUserText()
 		self.gText = self.getGroupText()
 		self.sText = self.getServicesText()
@@ -151,60 +161,88 @@ class InitGUI():
 		self.processes_text.type(NORMAL)
 		self.processes_text.resetText(self.pText)
 		self.processes_text.type(DISABLED)
+		self.resetLeftLabel()
+
+	def setLeftLabel(self, s):
+		self.left_label.config(text=("Current Process: "+s))
+		self.root.update()
+
+	def resetLeftLabel(self):
+		self.left_label.config(text="Current Process: None")
+		self.root.update()
 
 	def getPassword(self):
 		pwd = self.enc.decrypt()
 		return pwd
 
 	def getUserText(self):
+		self.setLeftLabel("Getting Users...")
 		u = Users()
 		retstr = u.getUsers()
 		ret = ''
 		for i in retstr:
 			ret += "User: " + i + "\n"
+		self.resetLeftLabel()
 		return ret
 
 	def getGroupText(self):
+		self.setLeftLabel("Getting Groups...")
 		g = Groups()
 		retstr = g.getGroups()
 		ret = ''
 		for i in retstr:
 			ret += i + "\n"
+		self.resetLeftLabel()
 		return ret
 
 	def getServicesText(self):
+		self.setLeftLabel("Getting Services...")
 		s = Services()
 		retstr = s.getservicesbasic()
+		self.resetLeftLabel()
 		return retstr
 
 	def getFirewallStatus(self):
+		self.setLeftLabel("Getting Firewall Status...")
 		f = Firewall()
 		retstr = f.getStatus(self.enc.decrypt())
+		self.resetLeftLabel()
 		return retstr
 
 	def getProcessesText(self):
+		self.setLeftLabel("Getting Processes...")
 		p = Processes()
 		retstr = p.getprocesses()
+		self.resetLeftLabel()
 		return retstr
 
 	def basicUpdate(self):
+		self.setLeftLabel("Updating Machine...")
 		ud = Update()
 		ud.update(self.enc)
+		self.resetLeftLabel()
 
 	def basicUpgrade(self):
+		self.setLeftLabel("Upgrading Machine...")
 		ud = Update()
 		ud.upgrade(self.enc)
+		self.resetLeftLabel()
 
 	def packageUpdate(self):
+		self.setLeftLabel("Updating Packages...")
 		ud = Update()
 		ud.updateall(self.enc)
+		self.resetLeftLabel()
 
 	def enableFirewall(self):
+		self.setLeftLabel("Enabling Firewall...")
 		f = Firewall()
 		f.enable(self.getPassword())
-		self.refresh()
+		self.refresh("NONE")
+		self.resetLeftLabel()
 
 	def disableFirewall(self):
+		self.setLeftLabel("Disabling Firewall...")
 		f = Firewall()
 		f.disable(self.getPassword())
-		self.refresh()
+		self.refresh("NONE")
