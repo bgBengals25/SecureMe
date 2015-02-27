@@ -14,5 +14,15 @@ class Services():
 		svcraw = os.popen("service --status-all").read()
 		services = svcraw.split("\n")
 		return services
+	
+	def getservicesalt(self):
+		os.system("echo service --status all >> myservices.txt")
+		svcfile = open("myservices.txt", "r")
+		services = svcfile.read().split("\n")
+		return services
+		
+	        
+	
+	
 		
 
