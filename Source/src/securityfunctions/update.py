@@ -14,7 +14,7 @@ class Update():
 		admin.AdminExec('apt-get update -y', UserPasswd)
 		tkMessageBox.showinfo(title="SecureMe - Updated", message="Successfully Updated the system!")
 
-	def update_upgrade(self, enc):
+	def upgrade(self, enc):
 		UserPasswd = enc.decrypt()
 		print("Upgrading new packages...")
 		admin.AdminExec('apt-get upgrade -y', UserPasswd)

@@ -40,10 +40,10 @@ class InitGUI():
 		self.root.config(menu=menubar)
 
 		self.notebook = ttk.Notebook(self.root, height=500)
-		basicFrame = Frame(self.notebook)
+		basicFrame = Frame(self.notebook, padx=25, pady=25)
 		usersFrame = Frame(self.notebook, padx=25, pady=25)
-		firewallFrame = Frame(self.notebook)
-		updateFrame = Frame(self.notebook)
+		firewallFrame = Frame(self.notebook, padx=25, pady=25)
+		updateFrame = Frame(self.notebook, padx=25, pady=25)
 		servicesFrame = Frame(self.notebook, padx=25, pady=25)
 		self.notebook.add(basicFrame, text='Basic')
 		self.notebook.add(usersFrame, text='Users')
@@ -93,7 +93,19 @@ class InitGUI():
 		update_label = Label(updateFrame, text='System Updates', font=self.liberation_font_15)
 		update_label.pack()
 
+		update_button = Button(updateFrame, text='Basic Update', command=lambda : self.basicUpdate())
+		update_button.pack(padx=10, pady=10)
+
+		upgrade_button = Button(updateFrame, text='Basic Upgrade', command=lambda : self.basicUpgrade())
+		upgrade_button.pack(padx=10, pady=10)
+
+		packageupdate_button = Button(updateFrame, text='Package Update', command=lambda : self.packageUpdate())
+		packageupdate_button.pack(padx=10, pady=10)
+
 		# Services Pane
+		services_label = Label(servicesFrame, text='System Services', font=self.liberation_font_15)
+		services_label.pack()
+
 		servicespanel = LabelFrame(servicesFrame, text="Services", padx=10, pady=10)
 		servicespanel.pack(side=TOP, fill=BOTH)
 		self.sText = self.getServicesText()
@@ -101,7 +113,6 @@ class InitGUI():
 		self.services_text.resetText(self.sText)
 		self.services_text.type(DISABLED)
 		self.services_text.pack(fill=BOTH)
-
 
 		self.root.mainloop()
 
@@ -141,6 +152,14 @@ class InitGUI():
 	def basicUpdate(self):
 		ud = Update()
 		ud.update(self.enc)
+
+	def basicUpgrade(self):
+		ud = Update()
+		ud.upgrade(self.enc)
+
+	def packageUpdate(self):
+		ud = Update()
+		ud.updateall(self.enc)
 
 	def enableFirewall(self):
 		f = Firewall()
