@@ -3,15 +3,17 @@ import os, admin
 from rootpassencryption import *
 p = Encryption()
 if os.path.exists("p.dat"):
-	p.decrypt()
+	UserPasswd = p.decrypt()
 else:
 	print("No password file loaded!")
 
 class Processes():
 	
 	def getprocesses(self):
-		processes = os.popen("top").read()
+		os.system("echo top >> processes.txt")
+		pfile = open("processes.txt", 'r')
+		processes = pfile.read()
+		pfile.close()
 		return processes
-
 
 		
