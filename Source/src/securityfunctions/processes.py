@@ -1,5 +1,5 @@
 #Designed by Luke Dinkler and Peter Toth
-import os, admin
+import os, admin, commands
 from rootpassencryption import *
 p = Encryption()
 if os.path.exists("p.dat"):
@@ -10,10 +10,10 @@ else:
 class Processes():
 	
 	def getprocesses(self):
-		os.system("echo top -d 2 >> processes.txt")
-		pfile = open("processes.txt", 'r')
+		'''pfile = os.popen("top -p 1 -n 1", "r")
 		processes = pfile.read()
-		pfile.close()
-		return processes
+		pfile.close()'''
+		output = commands.getoutput('top -b -n 1')
+		return output
 
 		

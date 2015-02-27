@@ -29,7 +29,7 @@ class InitGUI():
 
 	def build(self):
 		self.root = Tk()
-		self.root.geometry("500x400+300+300")
+		self.root.geometry("800x500+300+300")
 		self.root.title("SecureMe")
 		self.root.resizable(width=FALSE, height=FALSE)
 
