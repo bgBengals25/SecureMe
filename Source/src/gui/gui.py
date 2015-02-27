@@ -3,11 +3,13 @@
 import Tkinter
 from Tkinter import *
 import ttk
+from ttk import Style
 from getrtpwd import RootPasswordWindow
 import os, sys, time
 import threading
 from threading import Thread
 from text import CustomText
+from toolbar import ToolBar
 os.system('cd ..')
 from src.securityfunctions.admin import *
 from src.securityfunctions.firewall import *
@@ -31,9 +33,10 @@ class InitGUI():
 
 	def build(self):
 		self.root = Tk()
-		self.root.geometry("800x543+300+300")
+		self.root.geometry("800x622+200+200")
 		self.root.title("SecureMe")
-		self.root.resizable(width=FALSE, height=FALSE)
+		#self.root.resizable(width=FALSE, height=FALSE)
+		self.root.configure(bg="slate gray")
 
 		menubar = Menu(self.root)
 		optionsmenu = Menu(menubar)
@@ -42,7 +45,14 @@ class InitGUI():
 		menubar.add_cascade(label="Options", menu=optionsmenu)
 		self.root.config(menu=menubar)
 
-		self.notebook = ttk.Notebook(self.root, height=500)
+		self.toolbar = ToolBar(self.root, self)
+
+		style = Style()
+		style.configure("BW.TLabel", foreground="black", background="slate gray", borderwidth=2)
+
+		mFrame = Frame(self.root, bg="slate gray", padx=25, pady=25)
+		mFrame.pack(fill=BOTH)
+		self.notebook = ttk.Notebook(mFrame, height=500, style="BW.TLabel")
 		usersFrame = Frame(self.notebook, padx=25, pady=25)
 		firewallFrame = Frame(self.notebook, padx=25, pady=25)
 		updateFrame = Frame(self.notebook, padx=25, pady=25)
