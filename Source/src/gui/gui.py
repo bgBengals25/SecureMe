@@ -82,11 +82,20 @@ class InitGUI():
 		firewall_label = Label(firewallFrame, text='Firewall Settings', font=self.liberation_font_15)
 		firewall_label.pack()
 
+		firewallpanel = LabelFrame(firewallFrame, text='Firewall Status', height=100, width=450, padx=10, pady=10)
+		firewallpanel.pack(side=TOP, fill=X)
+
+		self.fText = self.getFirewallStatus()
+		self.firewall_text = CustomText(firewallpanel)
+		self.firewall_text.resetText(self.fText)
+		self.firewall_text.type(DISABLED)
+		self.firewall_text.pack(fill=X)
+
 		edFrame = Frame(firewallFrame)
 		fwEnable = Button(edFrame, text='Enable', command=lambda : self.enableFirewall())
-		fwEnable.pack(side=LEFT, padx=10, pady=10)
+		fwEnable.pack(side=LEFT, padx=10, pady=10, fill=X)
 		fwDisable = Button(edFrame, text='Disable', command=lambda : self.disableFirewall())
-		fwDisable.pack(side=RIGHT, padx=10, pady=10)
+		fwDisable.pack(side=RIGHT, padx=10, pady=10, fill=X)
 		edFrame.pack()
 
 		# Update Label
@@ -151,6 +160,11 @@ class InitGUI():
 	def getServicesText(self):
 		s = Services()
 		retstr = s.getservicesbasic()
+		return retstr
+
+	def getFirewallStatus(self):
+		f = Firewall()
+		retstr = f.getStatus(self.enc.decrypt())
 		return retstr
 
 	def basicUpdate(self):

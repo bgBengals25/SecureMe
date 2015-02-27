@@ -18,6 +18,12 @@ class Firewall():
 		print('Firewall Disabled!')
 		tkMessageBox.showinfo(title="SecureMe - Updated", message="Successfully disabled the Firewall!")
 
+	def getStatus(self, rp):
+		UserPassword = rp
+		print('Getting Status')
+		status = os.popen(admin.getAdminExec("ufw status", UserPassword)).read()
+		return status
+
 	def addexception(self, exception, rp):
 		UserPasswd = rp
 		print('insert code here')
