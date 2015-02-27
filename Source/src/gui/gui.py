@@ -40,23 +40,15 @@ class InitGUI():
 		self.root.config(menu=menubar)
 
 		self.notebook = ttk.Notebook(self.root, height=500)
-		basicFrame = Frame(self.notebook, padx=25, pady=25)
 		usersFrame = Frame(self.notebook, padx=25, pady=25)
 		firewallFrame = Frame(self.notebook, padx=25, pady=25)
 		updateFrame = Frame(self.notebook, padx=25, pady=25)
 		servicesFrame = Frame(self.notebook, padx=25, pady=25)
-		self.notebook.add(basicFrame, text='Basic')
 		self.notebook.add(usersFrame, text='Users')
 		self.notebook.add(updateFrame, text='Updates')
 		self.notebook.add(firewallFrame, text='Firewall')
 		self.notebook.add(servicesFrame, text='Services')
 		self.notebook.pack(fill=BOTH)
-
-		# Basic Panel
-		basic_label = Label(basicFrame, text='Basic Security Settings', font=self.liberation_font_15)
-		basic_label.pack()
-		basic_update = Button(basicFrame, text='Basic Update', command=lambda : self.basicUpdate())
-		basic_update.pack(padx=10, pady=10)
 
 		# Users Panel
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
@@ -82,6 +74,13 @@ class InitGUI():
 		firewall_label = Label(firewallFrame, text='Firewall Settings', font=self.liberation_font_15)
 		firewall_label.pack()
 
+		edFrame = Frame(firewallFrame)
+		fwEnable = Button(edFrame, text='Enable', command=lambda : self.enableFirewall())
+		fwEnable.pack(side=LEFT, padx=10, pady=10, fill=X)
+		fwDisable = Button(edFrame, text='Disable', command=lambda : self.disableFirewall())
+		fwDisable.pack(side=RIGHT, padx=10, pady=10, fill=X)
+		edFrame.pack()
+
 		firewallpanel = LabelFrame(firewallFrame, text='Firewall Status', height=100, width=450, padx=10, pady=10)
 		firewallpanel.pack(side=TOP, fill=X)
 
@@ -90,13 +89,6 @@ class InitGUI():
 		self.firewall_text.resetText(self.fText)
 		self.firewall_text.type(DISABLED)
 		self.firewall_text.pack(fill=X)
-
-		edFrame = Frame(firewallFrame)
-		fwEnable = Button(edFrame, text='Enable', command=lambda : self.enableFirewall())
-		fwEnable.pack(side=LEFT, padx=10, pady=10, fill=X)
-		fwDisable = Button(edFrame, text='Disable', command=lambda : self.disableFirewall())
-		fwDisable.pack(side=RIGHT, padx=10, pady=10, fill=X)
-		edFrame.pack()
 
 		# Update Label
 		update_label = Label(updateFrame, text='System Updates', font=self.liberation_font_15)
@@ -129,6 +121,7 @@ class InitGUI():
 		self.uText = self.getUserText()
 		self.gText = self.getGroupText()
 		self.sText = self.getServicesText()
+		self.fText = self.getFirewallStatus()
 		self.users_listlabel.config(text=self.uText)
 		self.groups_text.type(NORMAL)
 		self.groups_text.resetText(self.gText)
@@ -136,6 +129,9 @@ class InitGUI():
 		self.services_text.type(NORMAL)
 		self.services_text.resetText(self.sText)
 		self.services_text.type(DISABLED)
+		self.firewall_text.type(NORMAL)
+		self.firewall_text.resetText(self.fText)
+		self.firewall_text.type(DISABLED)
 
 	def getPassword(self):
 		pwd = self.enc.decrypt()
