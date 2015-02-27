@@ -16,7 +16,7 @@ class AntiVirus():
 			return False 
 	
 	def install(self):
-		admin.AdminExec("apt-get install clamav", UserPasswd)
+		admin.AdminExec("apt-get install clamav -y", UserPasswd)
 	
 		
 		
