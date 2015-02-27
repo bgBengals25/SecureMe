@@ -11,15 +11,11 @@ class Services():
 		return services
 
 	def getservicesbasic(self):
-		svcraw = os.popen("service --status-all").read()
-		services = svcraw.split("\n")
+		services = os.popen("service --status-all").read()
+		#services = svcraw.split("\n ")
 		return services
 	
-	def getservicesalt(self):
-		os.system("service --status all echo >> myservices.txt")
-		svcfile = open("myservices.txt", "r")
-		services = svcfile.read().split("\n")
-		return services
+	
 		
 	        
 	
