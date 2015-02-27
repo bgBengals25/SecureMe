@@ -10,7 +10,7 @@ else:
 class Processes():
 	
 	def getprocesses(self):
-		os.system("echo top >> processes.txt")
+		os.system("echo top -d 2 >> processes.txt")
 		pfile = open("processes.txt", 'r')
 		processes = pfile.read()
 		pfile.close()
