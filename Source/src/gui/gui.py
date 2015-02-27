@@ -178,7 +178,9 @@ class InitGUI():
 	def enableFirewall(self):
 		f = Firewall()
 		f.enable(self.getPassword())
+		self.refresh()
 
 	def disableFirewall(self):
 		f = Firewall()
 		f.disable(self.getPassword())
+		self.refresh()

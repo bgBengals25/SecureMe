@@ -18,7 +18,7 @@ class RootPasswordWindow():
 		l = Label(self.root, text="This program requires a root password:")
 		l.pack()
 
-		self.e = Entry(self.root)
+		self.e = Entry(self.root, show="*")
 		self.e.bind("<Return>", lambda x: self.submit())
 		self.e.pack(padx=10, pady=10)
 
