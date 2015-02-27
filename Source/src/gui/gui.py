@@ -119,10 +119,14 @@ class InitGUI():
 	def refresh(self):
 		self.uText = self.getUserText()
 		self.gText = self.getGroupText()
+		self.sText = self.getServicesText()
 		self.users_listlabel.config(text=self.uText)
 		self.groups_text.type(NORMAL)
 		self.groups_text.resetText(self.gText)
 		self.groups_text.type(DISABLED)
+		self.services_text.type(NORMAL)
+		self.services_text.resetText(self.sText)
+		self.services_text.type(DISABLED)
 
 	def getPassword(self):
 		pwd = self.enc.decrypt()
