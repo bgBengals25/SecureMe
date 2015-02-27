@@ -14,6 +14,7 @@ from src.securityfunctions.rootpassencryption import *
 from src.securityfunctions.update import *
 from src.securityfunctions.users import *
 from src.securityfunctions.service import Services
+from src.securityfunctions.processes import Processes
 
 class InitGUI():
 
@@ -44,10 +45,12 @@ class InitGUI():
 		firewallFrame = Frame(self.notebook, padx=25, pady=25)
 		updateFrame = Frame(self.notebook, padx=25, pady=25)
 		servicesFrame = Frame(self.notebook, padx=25, pady=25)
+		processesFrame = Frame(self.notebook, padx=25, pady=25)
 		self.notebook.add(usersFrame, text='Users')
 		self.notebook.add(updateFrame, text='Updates')
 		self.notebook.add(firewallFrame, text='Firewall')
 		self.notebook.add(servicesFrame, text='Services')
+		self.notebook.add(processesFrame, text='Processes')
 		self.notebook.pack(fill=BOTH)
 
 		# Users Panel
@@ -115,6 +118,18 @@ class InitGUI():
 		self.services_text.type(DISABLED)
 		self.services_text.pack(fill=BOTH)
 
+		# Processes Pane
+		processes_label = Label(processesFrame, text='System Processes', font=self.liberation_font_15)
+		processes_label.pack()
+
+		processespanel = LabelFrame(processesFrame, text='Processes', padx=10, pady=10)
+		processespanel.pack(side=TOP, fill=BOTH)
+		self.pText = self.getProcessesText()
+		self.processes_text = CustomText(processespanel)
+		self.processes_text.resetText(self.pText)
+		self.processes_text.type(DISABLED)
+		self.processes_text.pack(fill=BOTH)
+
 		self.root.mainloop()
 
 	def refresh(self):
@@ -122,6 +137,7 @@ class InitGUI():
 		self.gText = self.getGroupText()
 		self.sText = self.getServicesText()
 		self.fText = self.getFirewallStatus()
+		self.pText = self.getProcessesText()
 		self.users_listlabel.config(text=self.uText)
 		self.groups_text.type(NORMAL)
 		self.groups_text.resetText(self.gText)
@@ -132,6 +148,9 @@ class InitGUI():
 		self.firewall_text.type(NORMAL)
 		self.firewall_text.resetText(self.fText)
 		self.firewall_text.type(DISABLED)
+		self.processes_text.type(NORMAL)
+		self.processes_text.resetText(self.pText)
+		self.processes_text.type(DISABLED)
 
 	def getPassword(self):
 		pwd = self.enc.decrypt()
@@ -161,6 +180,11 @@ class InitGUI():
 	def getFirewallStatus(self):
 		f = Firewall()
 		retstr = f.getStatus(self.enc.decrypt())
+		return retstr
+
+	def getProcessesText(self):
+		p = Processes()
+		retstr = p.getprocesses()
 		return retstr
 
 	def basicUpdate(self):
