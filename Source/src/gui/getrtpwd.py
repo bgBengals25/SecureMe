@@ -20,12 +20,12 @@ class RootPasswordWindow():
 
 		self.e = Entry(self.root)
 		self.e.bind("<Return>", lambda x: self.submit())
-		self.e.pack()
+		self.e.pack(padx=10, pady=10)
 
 		f = Frame(self.root)
-		submit = Button(f, text="Submit!", command=self.submit)
+		submit = Button(f, text="Submit!", padx=10, pady=10, command=self.submit)
 		submit.pack(side=RIGHT)
-		cancel = Button(f, text="Cancel", command=self.cancel)
+		cancel = Button(f, text="Cancel", padx=10, pady=10, command=self.cancel)
 		cancel.pack(side=LEFT)
 		f.pack()
 
