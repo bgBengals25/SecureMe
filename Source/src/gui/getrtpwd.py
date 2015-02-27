@@ -18,14 +18,14 @@ class RootPasswordWindow():
 		l = Label(self.root, text="This program requires a root password:")
 		l.pack()
 
-		self.e = Entry(self.root)
+		self.e = Entry(self.root, padx=10, pady=10)
 		self.e.bind("<Return>", lambda x: self.submit())
 		self.e.pack()
 
 		f = Frame(self.root)
-		submit = Button(f, text="Submit!", command=self.submit)
+		submit = Button(f, text="Submit!", padx=10, pady=10, command=self.submit)
 		submit.pack(side=RIGHT)
-		cancel = Button(f, text="Cancel", command=self.cancel)
+		cancel = Button(f, text="Cancel", padx=10, pady=10, command=self.cancel)
 		cancel.pack(side=LEFT)
 		f.pack()
 
