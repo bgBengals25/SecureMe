@@ -63,16 +63,16 @@ class InitGUI():
 		userpanel = LabelFrame(usersFrame, text="Users", padx=10, pady=10)
 		userpanel.pack(side=TOP, fill=BOTH)
 
-		uText = self.getUserText()
-		self.users_listlabel = Label(userpanel, text=uText, padx=10, pady=10)
+		self.uText = self.getUserText()
+		self.users_listlabel = Label(userpanel, text=self.uText, padx=10, pady=10)
 		self.users_listlabel.pack(side=LEFT)
 
 		grouppanel = LabelFrame(usersFrame, text='Groups', padx=10, pady=10)
 		grouppanel.pack(side=TOP, fill=BOTH)
 
-		gText = self.getGroupText()
+		self.gText = self.getGroupText()
 		self.groups_listtext = Text(grouppanel, padx=10, pady=10)
-		self.groups_listtext.insert(END, gText)
+		self.groups_listtext.insert(END, self.gText)
 		self.groups_listtext.config(state=DISABLED)
 		self.groups_listtext.pack(side=LEFT, fill=BOTH)
 
@@ -96,11 +96,10 @@ class InitGUI():
 		self.root.mainloop()
 
 	def refresh(self):
-		uText = self.getUserText()
-		gText = self.getGroupText()
-		self.users_listlabel.config(text=uText)
+		self.uText = self.getUserText()
+		self.gText = self.getGroupText()
+		self.users_listlabel.configure(text=self.uText)
 		self.groups_listtext.delete("1.0", END)
-		#self.groups_listtext.insert(END, gText)
 
 	def getPassword(self):
 		pwd = self.enc.decrypt()
