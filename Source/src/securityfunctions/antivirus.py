@@ -10,13 +10,16 @@ else:
 
 class AntiVirus():
 	def check(self):
-		if os.path.exists("/bin/clamav"):
+		if os.path.exists("/usr/bin/clambc"):
 			return True
 		else:
 			return False 
 	
 	def install(self):
 		admin.AdminExec("apt-get install clamav -y", UserPasswd)
+	
+	def update(self):
+		admin.AdminExec("freshclam", UserPasswd)
 	
 		
 		
