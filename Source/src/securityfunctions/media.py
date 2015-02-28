@@ -3,8 +3,13 @@
 import os, admin
 from rootpassencryption import *
 
-def RmMediaFiles(enc):
-	UserPasswd = enc.decrypt()
+p = Encryption()
+if os.path.exists("p.dat"):
+	UserPasswd = p.decrypt()
+else:
+	print("No password file loaded!")
+	
+def RmMediaFiles():
 	for root, dirs, files in os.walk("/"):
 		for file in files:
 			if file.endswith("*.mp3"):
@@ -19,4 +24,11 @@ def RmMediaFiles(enc):
 			if file.endswith("*.mp4"):
 				admin.AdminExec("chown root " + os.path.join(root, file), UserPasswd)
 				admin.AdminExec("rm " + os.path.join(root, file), UserPasswd)
+			if file.endswith("*.jpeg"):
+				admin.AdminExec("chown root " + os.path.join(root, file), UserPasswd)
+				admin.AdminExec("rm " + os.path.join(root, file), UserPasswd)
+			if file.endswith("*.ogg"):
+				admin.AdminExec("chown root " + os.path.join(root, file), UserPasswd)
+				admin.AdminExec("rm " + os.path.join(root, file), UserPasswd)
+			
 			
