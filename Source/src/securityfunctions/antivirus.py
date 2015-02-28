@@ -35,6 +35,10 @@ class RootKits():
 	def update(self):
 		admin.AdminExec("rkhunter --update")
 	
+	def scan(self):
+		admin.AdminExec("rkhunter --check")
+	
+	
 	
 	
 	
