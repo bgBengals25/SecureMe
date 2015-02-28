@@ -33,10 +33,10 @@ class RootKits():
 			return False
 	
 	def update(self):
-		admin.AdminExec("rkhunter --update")
+		admin.AdminExec("rkhunter --update", UserPasswd)
 	
 	def scan(self):
-		admin.AdminExec("rkhunter --check")
+		admin.AdminExec("yes | rkhunter --check", UserPasswd)
 	
 	
 	
