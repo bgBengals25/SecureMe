@@ -15,5 +15,14 @@ class Processes():
 		pfile.close()'''
 		output = commands.getoutput('top -b -n 1')
 		return output
+	
+	def getpid(self, process):
+		cmd = os.popen("pidof " + process).read() 
+		return cmd
+	
+	def kill(self, pid):
+		os.system("kill " + pid)
+	
+		
 
 		
