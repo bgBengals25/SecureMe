@@ -13,4 +13,15 @@ class Ports():
 		portdata = os.popen("netstat -tulpn").read()
 		return portdata
 	
+	def killportprocess(self, port):
+		a = os.popen(admin.getAdminExec("lsof -i :" + port + " -t", UserPasswd)).read()
+		print(a)
+		if a == None:
+			return "Port is not in use"
+		else:
+			os.system("kill " + a)
+		
+		
+		
+	
 		
