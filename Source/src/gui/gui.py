@@ -19,6 +19,7 @@ from src.securityfunctions.update import *
 from src.securityfunctions.users import *
 from src.securityfunctions.service import Services
 from src.securityfunctions.processes import Processes
+from src.securityfunctions.sys import Linux
 
 class InitGUI():
 
@@ -35,7 +36,7 @@ class InitGUI():
 		self.root = Tk()
 		self.root.geometry("800x622+200+200")
 		self.root.title("SecureMe")
-		#self.root.resizable(width=FALSE, height=FALSE)
+		self.root.resizable(width=FALSE, height=FALSE)
 		self.root.configure(bg="slate gray")
 
 		menubar = Menu(self.root)
@@ -56,12 +57,10 @@ class InitGUI():
 		primaryFrame = Frame(self.notebook, padx=25, pady=25)
 		usersFrame = Frame(self.notebook, padx=25, pady=25)
 		firewallFrame = Frame(self.notebook, padx=25, pady=25)
-		updateFrame = Frame(self.notebook, padx=25, pady=25)
 		servicesFrame = Frame(self.notebook, padx=25, pady=25)
 		processesFrame = Frame(self.notebook, padx=25, pady=25)
 		self.notebook.add(primaryFrame, text='Primary')
 		self.notebook.add(usersFrame, text='Users')
-		self.notebook.add(updateFrame, text='Updates')
 		self.notebook.add(firewallFrame, text='Firewall')
 		self.notebook.add(servicesFrame, text='Services')
 		self.notebook.add(processesFrame, text='Processes')
@@ -69,12 +68,39 @@ class InitGUI():
 
 		self.updatebar = Frame(self.root)
 		self.updatebar.pack(side=BOTTOM, fill=X)
-		self.left_label = Label(self.updatebar, text="Current Process: None")
+		self.left_label = Label(self.updatebar, text="Status: None")
 		self.left_label.pack(side=LEFT, fill=X)
 
 		# Primary Panel
 		primary_label = Label(primaryFrame, text='Primary Settings', font=self.liberation_font_15)
-		primary_label.pack()
+		primary_label.grid(row=0, column=0, columnspan=2, sticky=N+S+E+W)
+
+		updatespanel = LabelFrame(primaryFrame, text='System Updates', padx=10, pady=10)
+		updatespanel.grid(row=1, column=1, sticky=W+N, padx=25, pady=25)
+
+		update_button = Button(updatespanel, text='Basic Update', command=lambda : self.basicUpdate())
+		update_button.pack(padx=5, pady=5)
+
+		upgrade_button = Button(updatespanel, text='Basic Upgrade', command=lambda : self.basicUpgrade())
+		upgrade_button.pack(padx=5, pady=5)
+
+		packageupdate_button = Button(updatespanel, text='Package Update', command=lambda : self.packageUpdate())
+		packageupdate_button.pack(padx=5, pady=5)
+
+		actionspanel = LabelFrame(primaryFrame, text='System Actions', padx=10, pady=10)
+		actionspanel.grid(row=1, column=0, sticky=E+N, padx=25, pady=25)
+
+		openterminal = Button(actionspanel, text='Open Terminal', command=lambda : self.openTerminal())
+		openterminal.pack(padx=5, pady=5)
+
+		opencontrol = Button(actionspanel, text='Open Control Panel', command=lambda : self.openControlPanel())
+		opencontrol.pack(padx=5, pady=5)
+
+		shutdown = Button(actionspanel, text='Shutdown', command=lambda : self.shutdown())
+		shutdown.pack(padx=5, pady=5)
+
+		rebootButton = Button(actionspanel, text='Reboot', command=lambda : self.reboot())
+		rebootButton.pack(padx=5, pady=5)
 
 		# Users Panel
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
@@ -115,19 +141,6 @@ class InitGUI():
 		self.firewall_text.resetText(self.fText)
 		self.firewall_text.type(DISABLED)
 		self.firewall_text.pack(fill=X)
-
-		# Update Label
-		update_label = Label(updateFrame, text='System Updates', font=self.liberation_font_15)
-		update_label.pack()
-
-		update_button = Button(updateFrame, text='Basic Update', command=lambda : self.basicUpdate())
-		update_button.pack(padx=10, pady=10)
-
-		upgrade_button = Button(updateFrame, text='Basic Upgrade', command=lambda : self.basicUpgrade())
-		upgrade_button.pack(padx=10, pady=10)
-
-		packageupdate_button = Button(updateFrame, text='Package Update', command=lambda : self.packageUpdate())
-		packageupdate_button.pack(padx=10, pady=10)
 
 		# Services Pane
 		services_label = Label(servicesFrame, text='System Services', font=self.liberation_font_15)
@@ -180,11 +193,11 @@ class InitGUI():
 		self.resetLeftLabel()
 
 	def setLeftLabel(self, s):
-		self.left_label.config(text=("Current Process: "+s))
+		self.left_label.config(text=("Status: "+s))
 		self.root.update()
 
 	def resetLeftLabel(self):
-		self.left_label.config(text="Current Process: None")
+		self.left_label.config(text="Status: None")
 		self.root.update()
 
 	def getPassword(self):
@@ -275,6 +288,36 @@ class InitGUI():
 			f = Firewall()
 			f.disable(self.getPassword())
 			self.refresh("NONE")
+		else:
+			pass
+
+	def openTerminal(self):
+		self.setLeftLabel("Opening Terminal...")
+		s = Linux()
+		s.terminal()
+		self.resetLeftLabel()
+
+	def openControlPanel(self):
+		self.setLeftLabel("Opening Control Panel")
+		s = Linux()
+		s.systemsettings()
+		self.resetLeftLabel()
+
+	def shutdown(self):
+		if tkMessageBox.askyesno("SecureMe - Power", "Are you sure you would like to power off?") == True:
+			self.setLeftLabel("Shutting Down...")
+			s = Linux()
+			s.shutdown(2)
+			self.resetLeftLabel()
+		else:
+			pass
+
+	def reboot(self):
+		if tkMessageBox.askyesno("SecureMe - Power", "Are you sure you would like to reboot?") == True:
+			self.setLeftLabel("Rebooting...")
+			s = Linux()
+			s.reboot()
+			self.resetLeftLabel()
 		else:
 			pass
 
