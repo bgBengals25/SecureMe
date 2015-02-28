@@ -15,7 +15,7 @@ class Users():
 		admin.AdminExec("deluser -r " + user, UserPasswd)
 
 	def adduser(self, username):
-		admin.AdminExec('adduser ' + username + ' gecos -- " , , , ," --disabled-password', UserPasswd)
+		admin.AdminExec('adduser ' + username + ' --gecos " , , , ," --disabled-password', UserPasswd)
 		
 	def getUsers(self):
 

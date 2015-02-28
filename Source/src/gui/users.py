@@ -13,14 +13,14 @@ class AddUser():
 
 	def __init__(self):
 		self.root = Tk()
-		self.root.geometry("400x200+300+300")
+		self.root.geometry("300x125+300+300")
 		self.root.title("SecureMe - Add User")
 		self.root.config()
 
 		self.users = Users()
 		self.enc = Encryption()
 
-		mainlabel = Label(self.root, text="Add User - Enter Required Data Fields")
+		mainlabel = Label(self.root, text="Add User")
 		mainlabel.pack()
 
 		self.errorLabel = Label(self.root, text="")
@@ -30,36 +30,24 @@ class AddUser():
 		fieldFrame.pack()
 
 		Label(fieldFrame, text="Username: ").grid(sticky=E)
-		Label(fieldFrame, text="Password: ").grid(sticky=E)
-		Label(fieldFrame, text="Password(repeat): ").grid(sticky=E)
 
-		usernameVar = StringVar()
-		passwordVar = StringVar()
-		password2Var = StringVar()
-		usernameEntry = Entry(fieldFrame, textvariable=usernameVar).grid(row=0, column=1)
-		passwordEntry = Entry(fieldFrame, textvariable=passwordVar, show="*").grid(row=1, column=1)
-		password2Entry = Entry(fieldFrame, textvariable=password2Var, show="*").grid(row=2, column=1)
+		usernameEntry = Entry(fieldFrame)
+		usernameEntry.grid(row=0, column=1)
 
-		submit = Button(self.root, text="Submit", command=lambda : self.submit(usernameVar.get(), passwordVar.get(), password2Var.get()))
-		submit.pack()
+		submit = Button(self.root, text="Submit", command=lambda : self.submit(usernameEntry.get()))
+		submit.pack(pady=15)
 
 		self.root.mainloop()
 
-	def submit(self, username, password, password2):
+	def submit(self, username):
+		self.errorLabel.configure(text="")
 
-		print(username + " " + password + " " + password2)
-		if password == password2:
-			self.errorLabel.configure(text="")
+		self.users.adduser(username)
 
-			self.users.adduser(username)
-			#admin.adminSetPassword(self.enc.decrypt(), username, password)
+		self.root.destroy()
 
-			self.root.destroy()
+		tkMessageBox.showinfo("SecureMe - User Created", "Successfully Created User: '" + username + "'!")
 
-			tkMessageBox.showinfo("SecureMe - User Created", "Successfully Created User: '" + username + "'!")
-
-		elif password != password2:
-			self.errorLabel.configure(text="*Passwords do not match!")
 
 
 

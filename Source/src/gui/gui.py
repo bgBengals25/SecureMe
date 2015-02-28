@@ -38,7 +38,6 @@ class InitGUI():
 		self.root.geometry("800x622+200+200")
 		self.root.title("SecureMe")
 		self.root.resizable(width=FALSE, height=FALSE)
-		self.root.configure(bg="slate gray")
 
 		menubar = Menu(self.root)
 		optionsmenu = Menu(menubar, tearoff=0)
