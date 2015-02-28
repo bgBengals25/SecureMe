@@ -10,6 +10,7 @@ import threading
 from threading import Thread
 from text import CustomText
 from toolbar import ToolBar
+from users import AddUser, DelUser
 os.system('cd ..')
 from src.securityfunctions.admin import *
 from src.securityfunctions.firewall import *
@@ -75,18 +76,6 @@ class InitGUI():
 		primary_label = Label(primaryFrame, text='Primary Settings', font=self.liberation_font_15)
 		primary_label.grid(row=0, column=0, columnspan=2, sticky=N+S+E+W)
 
-		updatespanel = LabelFrame(primaryFrame, text='System Updates', padx=10, pady=10)
-		updatespanel.grid(row=1, column=1, sticky=W+N, padx=25, pady=25)
-
-		update_button = Button(updatespanel, text='Basic Update', command=lambda : self.basicUpdate())
-		update_button.pack(padx=5, pady=5)
-
-		upgrade_button = Button(updatespanel, text='Basic Upgrade', command=lambda : self.basicUpgrade())
-		upgrade_button.pack(padx=5, pady=5)
-
-		packageupdate_button = Button(updatespanel, text='Package Update', command=lambda : self.packageUpdate())
-		packageupdate_button.pack(padx=5, pady=5)
-
 		actionspanel = LabelFrame(primaryFrame, text='System Actions', padx=10, pady=10)
 		actionspanel.grid(row=1, column=0, sticky=E+N, padx=25, pady=25)
 
@@ -102,9 +91,30 @@ class InitGUI():
 		rebootButton = Button(actionspanel, text='Reboot', command=lambda : self.reboot())
 		rebootButton.pack(padx=5, pady=5)
 
+		updatespanel = LabelFrame(primaryFrame, text='System Updates', padx=10, pady=10)
+		updatespanel.grid(row=1, column=1, sticky=W+N, padx=25, pady=25)
+
+		update_button = Button(updatespanel, text='Basic Update', command=lambda : self.basicUpdate())
+		update_button.pack(padx=5, pady=5)
+
+		upgrade_button = Button(updatespanel, text='Basic Upgrade', command=lambda : self.basicUpgrade())
+		upgrade_button.pack(padx=5, pady=5)
+
+		packageupdate_button = Button(updatespanel, text='Package Update', command=lambda : self.packageUpdate())
+		packageupdate_button.pack(padx=5, pady=5)
+
 		# Users Panel
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
 		users_label.pack()
+
+		editusers = Frame(usersFrame)
+		editusers.pack()
+
+		addusr = Button(editusers, text='Add User...', command=lambda : self.addUser())
+		addusr.grid(row=0, column=0, padx=5, pady=5)
+
+		delusr = Button(editusers, text='Del User...', command=lambda : self.delUser())
+		delusr.grid(row=0, column=1, padx=5, pady=5)
 
 		userpanel = LabelFrame(usersFrame, text="Users", padx=10, pady=10)
 		userpanel.pack(side=TOP, fill=BOTH)
@@ -320,6 +330,14 @@ class InitGUI():
 			self.resetLeftLabel()
 		else:
 			pass
+
+	def addUser(self):
+		self.setLeftLabel("Adding user...")
+		a = AddUser()
+
+
+	def delUser(self):
+		self.setLeftLabel("Deleting user...")
 
 	def quitMenu(self):
 		if tkMessageBox.askyesno("Secure Me - Quit?", "Are you sure you want to quit?") == True:
