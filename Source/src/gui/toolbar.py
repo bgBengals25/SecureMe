@@ -16,5 +16,5 @@ class ToolBar():
         def create(self):
 				refreshButton = Button(self.frame, text="Refresh", command=lambda : self.gui.refresh("Button Pressed"), relief=GROOVE)
 				refreshButton.pack(side=LEFT, padx=2, pady=2, fill=X)
-				exitButton = Button(self.frame, text="Exit", command=lambda : sys.exit(0), relief=GROOVE)
+				exitButton = Button(self.frame, text="Exit", command=lambda : self.gui.quitMenu(), relief=GROOVE)
 				exitButton.pack(side=LEFT, padx=2, pady=2, fill=X)

@@ -1,6 +1,6 @@
 # Made by Luke Dinkler and Peter Toth
 
-import Tkinter
+import Tkinter, tkMessageBox
 from Tkinter import *
 import ttk
 from ttk import Style
@@ -39,9 +39,9 @@ class InitGUI():
 		self.root.configure(bg="slate gray")
 
 		menubar = Menu(self.root)
-		optionsmenu = Menu(menubar)
+		optionsmenu = Menu(menubar, tearoff=0)
 		optionsmenu.add_command(label="Refresh (Ctrl+r)", command=lambda : self.refresh("NONE"))
-		optionsmenu.add_command(label="Exit", command=sys.exit)
+		optionsmenu.add_command(label="Exit", command=lambda : self.quitMenu())
 		menubar.add_cascade(label="Options", menu=optionsmenu)
 		self.root.config(menu=menubar)
 
@@ -227,32 +227,53 @@ class InitGUI():
 		return retstr
 
 	def basicUpdate(self):
-		self.setLeftLabel("Updating Machine...")
-		ud = Update()
-		ud.update(self.enc)
-		self.resetLeftLabel()
+		if tkMessageBox.askyesno("SecureMe - Update", "Proceed with update?") == True:
+			self.setLeftLabel("Updating Machine...")
+			ud = Update()
+			ud.update(self.enc)
+			self.resetLeftLabel()
+		else:
+			pass
 
 	def basicUpgrade(self):
-		self.setLeftLabel("Upgrading Machine...")
-		ud = Update()
-		ud.upgrade(self.enc)
-		self.resetLeftLabel()
+		if tkMessageBox.askyesno("SecureMe - Upgrade", "Proceed with upgrade?") == True:
+			self.setLeftLabel("Upgrading Machine...")
+			ud = Update()
+			ud.upgrade(self.enc)
+			self.resetLeftLabel()
+		else:
+			pass
 
 	def packageUpdate(self):
-		self.setLeftLabel("Updating Packages...")
-		ud = Update()
-		ud.updateall(self.enc)
-		self.resetLeftLabel()
+		if tkMessageBox.askyesno("SecureMe - Package Update", "Proceed with package update?") == True:
+			self.setLeftLabel("Updating Packages...")
+			ud = Update()
+			ud.updateall(self.enc)
+			self.resetLeftLabel()
+		else:
+			pass
 
 	def enableFirewall(self):
-		self.setLeftLabel("Enabling Firewall...")
-		f = Firewall()
-		f.enable(self.getPassword())
-		self.refresh("NONE")
-		self.resetLeftLabel()
+		if tkMessageBox.askyesno("SecureMe - Firewall", "Are you sure you wnt to enable the firewall?") == True:
+			self.setLeftLabel("Enabling Firewall...")
+			f = Firewall()
+			f.enable(self.getPassword())
+			self.refresh("NONE")
+			self.resetLeftLabel()
+		else:
+			pass
 
 	def disableFirewall(self):
-		self.setLeftLabel("Disabling Firewall...")
-		f = Firewall()
-		f.disable(self.getPassword())
-		self.refresh("NONE")
+		if tkMessageBox.askyesno("SecureMe - Firewall", "Are you sure you want to disable the firewall?") == True:
+			self.setLeftLabel("Disabling Firewall...")
+			f = Firewall()
+			f.disable(self.getPassword())
+			self.refresh("NONE")
+		else:
+			pass
+
+	def quitMenu(self):
+		if tkMessageBox.askyesno("Secure Me - Quit?", "Are you sure you want to quit?") == True:
+			sys.exit(0)
+		else:
+			pass
