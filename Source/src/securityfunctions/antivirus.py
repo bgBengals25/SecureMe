@@ -1,4 +1,5 @@
-#Designed by Luke Dinkler and Peter Toth
+#Designed by Luke Dinkler and Peter Toth 2015
+
 import os, admin
 from rootpassencryption import *
 
@@ -20,6 +21,22 @@ class AntiVirus():
 	
 	def update(self):
 		admin.AdminExec("freshclam", UserPasswd)
+	
+class RootKits():
+	def install(self):
+		admin.AdminExec("apt-get install rkhunter -y", UserPasswd)
+	
+	def check(self):
+		if os.path.exists("/usr/bin/rkhunter"):
+			return True
+		else:
+			return False
+	
+	def update(self):
+		admin.AdminExec("rkhunter --update")
+	
+	
+	
 	
 		
 		
