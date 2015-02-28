@@ -13,5 +13,9 @@ class Linux():
 		admin.AdminExec("shutdown -h " + time, UserPasswd)
 	def reboot(self):
 		admin.AdminExec("reboot", UserPasswd)
-		
+	def delete(self, filetorm):
+		admin.AdminExec("rm " + filetorm, UserPasswd)
+	def copy(self, source, destination):
+		admin.AdminExec("cp " + source + " " + destination, UserPasswd)
+	
 	
