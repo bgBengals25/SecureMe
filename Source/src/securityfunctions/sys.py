@@ -1,6 +1,6 @@
 #Designed by Luke Dinkler and Peter Toth 2015
 
-import os, subprocess, admin
+import os, subprocess, admin, webbrowser
 from rootpassencryption import *
 
 e = Encryption()
@@ -28,6 +28,10 @@ class Linux():
 			os.system("gnome-terminal")
 		else:
 			return False
+	
+	def urlopen(self, url):
+		webbrowser.open(url)
+		
 			
 	
 	
