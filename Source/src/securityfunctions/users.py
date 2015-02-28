@@ -5,6 +5,9 @@ from rootpassencryption import *
 enc = Encryption()
 if os.path.exists("p.dat"):
 	UserPasswd = enc.decrypt()
+else:
+	print("Pass file not loaded!")
+
 
 class Users():
 
