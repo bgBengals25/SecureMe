@@ -25,7 +25,7 @@ class Services():
 		admin.AdminExec("service " + service + " stop", UserPasswd)
 		
 	def start(self, service):
-		admin.AdminExec("service " + service + " start", UserPasswd(|)
+		admin.AdminExec("service " + service + " start", UserPasswd)
 		
 	
 		
