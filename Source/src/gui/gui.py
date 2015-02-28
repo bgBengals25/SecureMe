@@ -53,11 +53,13 @@ class InitGUI():
 		mFrame = Frame(self.root, bg="slate gray", padx=25, pady=25)
 		mFrame.pack(fill=BOTH)
 		self.notebook = ttk.Notebook(mFrame, height=500, style="BW.TLabel")
+		primaryFrame = Frame(self.notebook, padx=25, pady=25)
 		usersFrame = Frame(self.notebook, padx=25, pady=25)
 		firewallFrame = Frame(self.notebook, padx=25, pady=25)
 		updateFrame = Frame(self.notebook, padx=25, pady=25)
 		servicesFrame = Frame(self.notebook, padx=25, pady=25)
 		processesFrame = Frame(self.notebook, padx=25, pady=25)
+		self.notebook.add(primaryFrame, text='Primary')
 		self.notebook.add(usersFrame, text='Users')
 		self.notebook.add(updateFrame, text='Updates')
 		self.notebook.add(firewallFrame, text='Firewall')
@@ -69,6 +71,10 @@ class InitGUI():
 		self.updatebar.pack(side=BOTTOM, fill=X)
 		self.left_label = Label(self.updatebar, text="Current Process: None")
 		self.left_label.pack(side=LEFT, fill=X)
+
+		# Primary Panel
+		primary_label = Label(primaryFrame, text='Primary Settings', font=self.liberation_font_15)
+		primary_label.pack()
 
 		# Users Panel
 		users_label = Label(usersFrame, text='User Security Settings', font=self.liberation_font_15)
@@ -254,7 +260,7 @@ class InitGUI():
 			pass
 
 	def enableFirewall(self):
-		if tkMessageBox.askyesno("SecureMe - Firewall", "Are you sure you wnt to enable the firewall?") == True:
+		if tkMessageBox.askyesno("SecureMe - Firewall", "Are you sure you want to enable the firewall?") == True:
 			self.setLeftLabel("Enabling Firewall...")
 			f = Firewall()
 			f.enable(self.getPassword())
