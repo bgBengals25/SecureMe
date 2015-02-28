@@ -13,4 +13,11 @@ class Ports():
 		portdata = os.popen("netstat -tulpn").read()
 		return portdata
 	
+	def killportprocess(self, port):
+		a = admin.adminpopen("netstat -ap | grep :" + port, UserPasswd)
+		os.system("kill " + a)
+		
+		
+		
+	
 		
