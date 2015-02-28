@@ -3,6 +3,10 @@ import os, subprocess, admin
 from rootpassencryption import *
 import tkMessageBox
 
+p = Encryption()
+if os.path.exists("p.dat"):
+	UserPassword = p.decrypt()
+	
 class Firewall():
 	def enable(self, rp):
 		UserPasswd = rp
@@ -27,3 +31,12 @@ class Firewall():
 	def addexception(self, exception, rp):
 		UserPasswd = rp
 		print('insert code here')
+	
+	def blockport(self, port):
+		admin.AdminExec("ufw deny port " + port, UserPassword)
+		print("Blocking port: " + port)
+	
+	def blockip(self, ipaddress):
+		admin.AdminExec("ufw deny from " + ipaddress, UserPassword)
+		print("Blocking IP Address: " + ipaddress)
+		
