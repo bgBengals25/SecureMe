@@ -23,5 +23,11 @@ class Linux():
 			os.system("/usr/bin/unity-control-center")
 		else:
 			return False
+	def terminal(self):
+		if os.path.exists("/usr/bin/gnome-terminal"):
+			os.system("gnome-terminal")
+		else:
+			return False
+			
 	
 	
