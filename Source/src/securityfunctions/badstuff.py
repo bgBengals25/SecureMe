@@ -11,8 +11,9 @@ else:
 class Secure():
 	def netcat(self):
 		if os.path.exists("/bin/nc"):
-			admin.AdminExec("apt-get purge netcat-openbsd")
-			admin.AdminExec("apt-get purge netcat-traditional") #One may fail, that's alright!	
+			admin.AdminExec("apt-get purge netcat-openbsd -y")
+			admin.AdminExec("apt-get purge netcat-traditional -y") #One may fail, that's alright!	
+			admin.AdminExec("apt-get purge netcat -y")
 		else:
 			return False
 	def telnet(self):

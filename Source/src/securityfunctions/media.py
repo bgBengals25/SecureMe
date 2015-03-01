@@ -27,8 +27,8 @@ def RmMediaFiles():
 			if file.endswith("*.jpeg"):
 				admin.AdminExec("chown root " + os.path.join(root, file), UserPasswd)
 				admin.AdminExec("rm " + os.path.join(root, file), UserPasswd)
-			if file.endswith("*.ogg"):
-				admin.AdminExec("chown root " + os.path.join(root, file), UserPasswd)
-				admin.AdminExec("rm " + os.path.join(root, file), UserPasswd)
+			#if file.endswith("*.ogg"):
+				#admin.AdminExec("chown root " + os.path.join(root, file), UserPasswd)
+				#admin.AdminExec("rm " + os.path.join(root, file), UserPasswd)
 			
 			
