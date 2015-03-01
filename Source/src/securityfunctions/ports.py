@@ -24,10 +24,12 @@ class Ports():
 	def getportprocess(self, port):
 		pid = os.popen(admin.getAdminExec("lsof -i :" + port + " -t", UserPasswd)).read()
 		print(pid)
-		if pid == None or pid == " " or pid == "\n" or pid == "":
-			return "Port is not in use"
+		if pid == "":
+			return False
 		else:
-			b = os.popen("ps -p " + pid + " -o comm=").read()
+			p = pid.rstrip()
+			b = os.popen("ps -p " + p + " -o comm=").read()
+			print(b)
 			return b
 			
 			
