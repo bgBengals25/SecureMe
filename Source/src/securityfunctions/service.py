@@ -26,8 +26,15 @@ class Services():
 		
 	def start(self, service):
 		admin.AdminExec("service " + service + " start", UserPasswd)
-		
 	
+	def getstatus(self, service):
+		rawdata = os.popen(getAdminExec("service " + service + " status", UserPasswd))
+		if "start" in rawdata:
+			return "Started"
+			print("Service is running!")
+		else:
+			return "Stopped"
+			print("Service is stopped!")
 		
 	        
 	
